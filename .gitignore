@@ -1,0 +1,13 @@
+.idea
+.vscode
+venv/
+core/migrations/
+accounts/migrations/
+users/migrations/
+core/__pycache__/
+src/email.py
+src/__pycache__/
+users/__pycache__/
+accounts/__pycache__/
+media/
+db.sqlite3

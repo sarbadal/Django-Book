@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style>
+  table {
+    border-collapse: collapse;
+  }
+  /* td {
+    border: 1px solid #ccc;
+  } */
+  th, td {
+    padding: 5px;
+    text-align: left;
+  }
+  tr:nth-child(even) {
+    background-color: #fff;
+  }
+  tr:nth-child(odd) {
+    background-color: #fff;
+  }
+</style>
+
+{% block content_header %}
+    {% if user.is_authenticated %}
+      <h3 style="color:#404040;">Books <a style="color:#404040;" href="{% url 'upload_book' %}" class="fa fa-upload"></a> <a style="font-size:15px;" href="{% url 'home' %}"> My Books</a></h3>
+    {% else %}
+     <h3>Books</h3>
+    {% endif %}
+{% endblock %}
+
+  <table class="table mb-0">
+    <thead>
+      <tr>
+        <th style="text-align: left;">Cover</th>
+        <th style="text-align: left;">Title</th>
+        <th style="text-align: left;">Author</th>
+        <th style="text-align: center;">Download</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for book in books %}
+        <tr>
+          <td style="vertical-align: middle;">
+            {% if book.cover %}
+              <img src="{{ book.cover.url }}" alt="{{ book.title }}" style="width:80px;">
+            {% else %}
+              <span class="text-muted">No cover</span>
+            {% endif %}
+          </td>
+          <td style="vertical-align: middle;">{{ book.title }}</td>
+          <td style="vertical-align: middle;">{{ book.author }}</td>
+          <td style="text-align: center; vertical-align: middle;">
+            <a href="{{ book.pdf.url }}" class="fa fa-download btn btn-primary btn-sm" target="_blank"></a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
